@@ -23,8 +23,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Capybara::DSL,                  type: :request
   config.include Capybara::RSpecMatchers,        type: :request
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = true
   config.order = "random"
 
