@@ -5,6 +5,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/email/rspec'
 require 'database_cleaner'
@@ -33,4 +34,15 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+end
+
+def sign_in_with(resource)
+  name_resource = resource.class.to_s.downcase
+
+  visit "/#{name_resource.pluralize}/sign_in"
+
+  fill_in "#{name_resource}[email]",    with: resource.email
+  fill_in "#{name_resource}[password]", with: "123123123"
+
+  click_button "Sign in"
 end
